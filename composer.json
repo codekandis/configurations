@@ -1,0 +1,49 @@
+{
+	"name": "codekandis/configurations",
+	"description": "`codekandis/configurations` is a library providing configuration interfaces and classes.",
+	"keywords": [
+		"php",
+		"library",
+		"configurations",
+		"interfaces",
+		"classes"
+	],
+	"minimum-stability": "stable",
+	"prefer-stable": true,
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Christian Ramelow",
+			"email": "info@codekandis.net",
+			"homepage": "https://codekandis.net",
+			"role": "Developer"
+		}
+	],
+	"support": {
+		"email": "info@codekandis.net",
+		"issues": "https://github.com/codekandis/configurations/issues",
+		"docs": "https://github.com/codekandis/configurations/README.md",
+		"source": "https://github.com/codekandis/configurations/tree/master"
+	},
+	"require": {
+		"php": "^7.4"
+	},
+	"require-dev": {
+		"roave/security-advisories": "dev-master",
+		"codekandis/phpunit": "^3"
+	},
+	"autoload": {
+		"psr-4": {
+			"CodeKandis\\Configurations\\": [
+				"src/"
+			]
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"CodeKandis\\Configurations\\Tests\\": [
+				"tests/"
+			]
+		}
+	}
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<phpunit
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+	bootstrap="../tests/bootstrap.php"
+	verbose="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	convertErrorsToExceptions="true"
+	beStrictAboutOutputDuringTests="true"
+	cacheResult="false"
+	colors="true">
+	<testsuites>
+		<testsuite name="codekandis/configurations">
+			<directory>../tests</directory>
+		</testsuite>
+	</testsuites>
+	<coverage processUncoveredFiles="false">
+		<include>
+			<directory suffix=".php">../src</directory>
+		</include>
+		<report>
+			<text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="false"/>
+		</report>
+	</coverage>
+	<logging/>
+</phpunit>
