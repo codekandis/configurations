@@ -1,7 +1,9 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\Configurations;
 
+use function array_merge;
 use function file_exists;
+use function sprintf;
 
 /**
  * Represents the interface of any plain configuration loader.
@@ -17,37 +19,29 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 	protected const ERROR_PLAIN_CONFIGURATION_NOT_FOUND = 'The plain configuration `%s` does not exist.';
 
 	/**
-	 * Stores the path of the directory containing the plain configuration.
-	 * @var string
+	 * Stores the merged plain configuration;
+	 * @var array
 	 */
-	private string $directoryPath;
+	private array $plainConfiguration = [];
+
 
 	/**
-	 * Stores the name of the plain configuration.
-	 * @var string
+	 * {@inheritDoc}
 	 */
-	private string $configurationName;
-
-	/**
-	 * Constructor method.
-	 * @param string $directoryPath The path of the directory containing the plain configuration.
-	 * @param string $configurationName The name of the plain configuration.
-	 */
-	public function __construct( string $directoryPath, string $configurationName )
+	public function getPlainConfiguration(): array
 	{
-		$this->directoryPath     = $directoryPath;
-		$this->configurationName = $configurationName;
+		return $this->plainConfiguration;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function load(): array
+	public function load( string $directoryPath, string $configurationName ): PlainConfigurationLoaderInterface
 	{
 		$plainConfigurationPath = sprintf(
 			'%s/%s.php',
-			$this->directoryPath,
-			$this->configurationName
+			$directoryPath,
+			$configurationName
 		);
 
 		if ( false === file_exists( $plainConfigurationPath ) )
@@ -60,6 +54,11 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 			);
 		}
 
-		return require $plainConfigurationPath;
+		$this->plainConfiguration = array_merge(
+			$this->plainConfiguration,
+			require $plainConfigurationPath
+		);
+
+		return $this;
 	}
 }
