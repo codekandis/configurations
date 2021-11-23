@@ -9,15 +9,15 @@ namespace CodeKandis\Configurations;
 abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInterface
 {
 	/**
-	 * Stores the singleton instance of the configuration registry.
-	 * @var ConfigurationRegistryInterface
+	 * Stores the singleton instances of the configuration registries.
+	 * @var ConfigurationRegistryInterface[]
 	 */
-	protected static ConfigurationRegistryInterface $instance;
+	private static array $instances = [];
 
 	/**
 	 * Constructor method.
 	 */
-	private function __construct()
+	protected function __construct()
 	{
 		$this->initialize();
 	}
@@ -25,7 +25,7 @@ abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInt
 	/**
 	 * Clones the configuration registry.
 	 */
-	private function __clone()
+	final private function __clone()
 	{
 	}
 
@@ -35,8 +35,10 @@ abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInt
 	 */
 	public static function _(): ConfigurationRegistryInterface
 	{
-		return static::$instance
-			   ?? static::$instance = new static();
+		$calledClass = get_called_class();
+
+		return static::$instances[ $calledClass ]
+			   ?? static::$instances[ $calledClass ] = new static();
 	}
 
 	/**
