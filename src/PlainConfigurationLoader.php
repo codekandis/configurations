@@ -1,7 +1,7 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\Configurations;
 
-use function array_merge;
+use function array_replace_recursive;
 use function file_exists;
 use function sprintf;
 
@@ -23,7 +23,6 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 	 * @var array
 	 */
 	private array $plainConfiguration = [];
-
 
 	/**
 	 * {@inheritDoc}
@@ -54,7 +53,7 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 			);
 		}
 
-		$this->plainConfiguration = array_merge(
+		$this->plainConfiguration = array_replace_recursive(
 			$this->plainConfiguration,
 			require $plainConfigurationPath
 		);
