@@ -54,6 +54,23 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	}
 
 	/**
+	 * Reads a value from the plain configuration or null.
+	 * @param string $index The index of the value to read.
+	 * @return ?mixed The read value if it exists, otherwise null.
+	 */
+	protected function readOrNull( string $index )
+	{
+		try
+		{
+			return $this->read( $index );
+		}
+		catch ( PlainConfigurationIndexNotFoundException $throwable )
+		{
+			return null;
+		}
+	}
+
+	/**
 	 * Reads a value from the plain configuration or a default value.
 	 * @param string $index The index of the value to read.
 	 * @return mixed The read value if it exists, otherwise the default value.
