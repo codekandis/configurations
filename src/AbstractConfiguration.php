@@ -33,36 +33,38 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	}
 
 	/**
-	 * Reads a value from the plain configuration.
-	 * @param string $index The index of the value to read.
-	 * @return mixed The read value.
-	 * @throws PlainConfigurationIndexNotFoundException The index does not exist in the plain configuration.
+	 * {@inheritDoc}
 	 */
-	protected function read( string $index )
+	public function read( string ...$indices )
 	{
-		if ( false === array_key_exists( $index, $this->plainConfiguration ) )
+		$nestedConfigurationData = $this->plainConfiguration;
+
+		foreach ( $indices as $index )
 		{
-			throw new PlainConfigurationIndexNotFoundException(
-				sprintf(
-					static::ERROR_INDEX_NOT_FOUND,
-					$index
-				)
-			);
+			if ( false === is_array( $nestedConfigurationData ) || false === array_key_exists( $index, $nestedConfigurationData ) )
+			{
+				throw new PlainConfigurationIndexNotFoundException(
+					sprintf(
+						static::ERROR_INDEX_NOT_FOUND,
+						$index
+					)
+				);
+			}
+
+			$nestedConfigurationData = $nestedConfigurationData[ $index ];
 		}
 
-		return $this->plainConfiguration[ $index ];
+		return $nestedConfigurationData;
 	}
 
 	/**
-	 * Reads a value from the plain configuration or null.
-	 * @param string $index The index of the value to read.
-	 * @return ?mixed The read value if it exists, otherwise null.
+	 * {@inheritDoc}
 	 */
-	protected function readOrNull( string $index )
+	public function readOrNull( string ...$indices )
 	{
 		try
 		{
-			return $this->read( $index );
+			return $this->read( ...$indices );
 		}
 		catch ( PlainConfigurationIndexNotFoundException $throwable )
 		{
@@ -71,15 +73,13 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	}
 
 	/**
-	 * Reads a value from the plain configuration or a default value.
-	 * @param string $index The index of the value to read.
-	 * @return mixed The read value if it exists, otherwise the default value.
+	 * {@inheritDoc}
 	 */
-	protected function readOrDefault( string $index, $default )
+	public function readOrDefault( $default, string ...$indices )
 	{
 		try
 		{
-			return $this->read( $index );
+			return $this->read( ...$indices );
 		}
 		catch ( PlainConfigurationIndexNotFoundException $throwable )
 		{
