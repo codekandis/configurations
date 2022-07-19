@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [keep a changelog][xtlink-keep-a-changelog]
 and this project adheres to [Semantic Versioning 2.0.0][xtlink-semantic-versioning].
 
+## [0.6.0] - 2022-07-19
+
+### Adds
+
+* reading nested configuration indices
+
+[0.6.0]: https://github.com/codekandis/configurations/compare/0.5.0..0.6.0
+
+---
 ## [0.5.0] - 2022-05-21
 
 ### Adds
