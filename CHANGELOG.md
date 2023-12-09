@@ -5,9 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [keep a changelog][xtlink-keep-a-changelog]
 and this project adheres to [Semantic Versioning 2.0.0][xtlink-semantic-versioning].
 
+## [0.6.1] - 2023-12-10
+
+### Fixed
+
+* removed `final` keyword on private methods
+
+[0.6.1]: https://github.com/codekandis/configurations/compare/0.6.0..0.6.1
+
+---
 ## [0.6.0] - 2022-07-19
 
-### Adds
+### Added
 
 * reading nested configuration indices
 
@@ -16,7 +25,7 @@ and this project adheres to [Semantic Versioning 2.0.0][xtlink-semantic-versioni
 ---
 ## [0.5.0] - 2022-05-21
 
-### Adds
+### Added
 
 * method `AbstractConfiguration::readOrNull()`
 
@@ -25,7 +34,7 @@ and this project adheres to [Semantic Versioning 2.0.0][xtlink-semantic-versioni
 ---
 ## [0.4.2] - 2022-01-03
 
-### Fixes
+### Fixed
 
 * merging of multiple plain configurations
 
@@ -34,7 +43,7 @@ and this project adheres to [Semantic Versioning 2.0.0][xtlink-semantic-versioni
 ---
 ## [0.4.1] - 2021-11-23
 
-### Fixes
+### Fixed
 
 * singleton instance creation of inherited configuration registries
 
