@@ -32,7 +32,7 @@ abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInt
 	 * Clones the configuration registry.
 	 * @throws CloningConfigurationRegistryIsProhibitedException The cloning of the configuration registry is prohibited.
 	 */
-	final private function __clone()
+	private function __clone()
 	{
 		throw new CloningConfigurationRegistryIsProhibitedException( static::ERROR_CLONING_IS_PROHIBITED );
 	}
