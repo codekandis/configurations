@@ -13,12 +13,6 @@ use function sprintf;
 class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 {
 	/**
-	 * Represents the error message if the plain configuration does not exist.
-	 * @var string
-	 */
-	protected const ERROR_PLAIN_CONFIGURATION_NOT_FOUND = 'The plain configuration `%s` does not exist.';
-
-	/**
 	 * Stores the merged plain configuration;
 	 * @var array
 	 */
@@ -45,12 +39,7 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 
 		if ( false === file_exists( $plainConfigurationPath ) )
 		{
-			throw new PlainConfigurationNotFoundException(
-				sprintf(
-					static::ERROR_PLAIN_CONFIGURATION_NOT_FOUND,
-					$plainConfigurationPath
-				)
-			);
+			throw PlainConfigurationNotFoundException::with_configurationPath( $plainConfigurationPath );
 		}
 
 		$this->plainConfiguration = array_replace_recursive(
