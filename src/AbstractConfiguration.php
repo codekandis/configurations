@@ -12,18 +12,11 @@ use function array_key_exists;
 abstract class AbstractConfiguration implements ConfigurationInterface
 {
 	/**
-	 * Stores the plain configuration data.
-	 * @var array
-	 */
-	protected array $plainConfiguration;
-
-	/**
 	 * Constructor method.
 	 * @param array $plainConfiguration The plain configuration data.
 	 */
-	public function __construct( array $plainConfiguration )
+	public function __construct( protected readonly array $plainConfiguration )
 	{
-		$this->plainConfiguration = $plainConfiguration;
 	}
 
 	/**
