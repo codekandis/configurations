@@ -14,14 +14,14 @@ interface ConfigurationInterface
 	 * @return mixed The read value.
 	 * @throws UnknownPlainConfigurationIndexExceptionInterface The index does not exist in the plain configuration.
 	 */
-	public function read( string ...$indices );
+	public function read( string ...$indices ): mixed;
 
 	/**
 	 * Reads a value from the plain configuration or null.
 	 * @param string[] $indices The nested indices of the value to read.
 	 * @return ?mixed The read value if it exists, otherwise null.
 	 */
-	public function readOrNull( string ...$indices );
+	public function readOrNull( string ...$indices ): mixed;
 
 	/**
 	 * Reads a value from the plain configuration or a default value.
@@ -29,5 +29,5 @@ interface ConfigurationInterface
 	 * @param string[] $indices The nested indices of the value to read.
 	 * @return mixed The read value if it exists, otherwise the default value.
 	 */
-	public function readOrDefault( $default, string ...$indices );
+	public function readOrDefault( mixed $default, string ...$indices ): mixed;
 }

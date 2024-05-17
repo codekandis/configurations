@@ -26,7 +26,7 @@ abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInt
 	 * Clones the configuration registry.
 	 * @throws CloningConfigurationRegistryUnsupportedExceptionInterface The cloning of the configuration registry is unsupported.
 	 */
-	private function __clone()
+	private function __clone(): void
 	{
 		throw new CloningConfigurationRegistryUnsupportedException();
 	}
