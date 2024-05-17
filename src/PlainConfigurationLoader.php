@@ -15,13 +15,12 @@ use function sprintf;
 class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 {
 	/**
-	 * Stores the merged plain configuration;
-	 * @var array
+	 * Stores the merged plain configuration.
 	 */
 	private array $plainConfiguration = [];
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	#[Override]
 	public function getPlainConfiguration(): array
@@ -30,7 +29,7 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	#[Override]
 	public function load( string $directoryPath, string $configurationName ): static
