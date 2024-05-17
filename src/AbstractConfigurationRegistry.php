@@ -26,7 +26,7 @@ abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInt
 	 * Clones the configuration registry.
 	 * @throws CloningConfigurationRegistryIsProhibitedExceptionInterface The cloning of the configuration registry is prohibited.
 	 */
-	private function __clone()
+	private function __clone(): void
 	{
 		throw CloningConfigurationRegistryIsProhibitedException::with_defaultMessage();
 	}

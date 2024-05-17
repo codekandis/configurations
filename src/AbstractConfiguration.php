@@ -23,7 +23,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	 * {@inheritDoc}
 	 */
 	#[Override]
-	public function read( string ...$indices )
+	public function read( string ...$indices ): mixed
 	{
 		$nestedConfigurationData = $this->plainConfiguration;
 
@@ -44,7 +44,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	 * {@inheritDoc}
 	 */
 	#[Override]
-	public function readOrNull( string ...$indices )
+	public function readOrNull( string ...$indices ): mixed
 	{
 		try
 		{
@@ -60,7 +60,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	 * {@inheritDoc}
 	 */
 	#[Override]
-	public function readOrDefault( $default, string ...$indices )
+	public function readOrDefault( mixed $default, string ...$indices ): mixed
 	{
 		try
 		{
