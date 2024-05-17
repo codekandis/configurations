@@ -3,6 +3,7 @@ namespace CodeKandis\Configurations;
 
 use Override;
 use function array_key_exists;
+use function is_array;
 
 /**
  * Represents the base class of any configuration.
