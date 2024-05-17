@@ -1,6 +1,7 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\Configurations;
 
+use Override;
 use function array_replace_recursive;
 use function file_exists;
 use function sprintf;
@@ -21,6 +22,7 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 	/**
 	 * {@inheritDoc}
 	 */
+	#[Override]
 	public function getPlainConfiguration(): array
 	{
 		return $this->plainConfiguration;
@@ -29,6 +31,7 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 	/**
 	 * {@inheritDoc}
 	 */
+	#[Override]
 	public function load( string $directoryPath, string $configurationName ): PlainConfigurationLoaderInterface
 	{
 		$plainConfigurationPath = sprintf(

@@ -1,6 +1,7 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\Configurations;
 
+use Override;
 use function array_key_exists;
 
 /**
@@ -28,6 +29,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	/**
 	 * {@inheritDoc}
 	 */
+	#[Override]
 	public function read( string ...$indices )
 	{
 		$nestedConfigurationData = $this->plainConfiguration;
@@ -48,6 +50,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	/**
 	 * {@inheritDoc}
 	 */
+	#[Override]
 	public function readOrNull( string ...$indices )
 	{
 		try
@@ -63,6 +66,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	/**
 	 * {@inheritDoc}
 	 */
+	#[Override]
 	public function readOrDefault( $default, string ...$indices )
 	{
 		try
