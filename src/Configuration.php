@@ -21,7 +21,7 @@ class Configuration implements ConfigurationInterface
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	#[Override]
 	public function read( string ...$indices ): mixed
@@ -42,7 +42,7 @@ class Configuration implements ConfigurationInterface
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	#[Override]
 	public function readOrNull( string ...$indices ): mixed
@@ -58,7 +58,7 @@ class Configuration implements ConfigurationInterface
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	#[Override]
 	public function readOrDefault( mixed $defaultValue = null, string ...$indices ): mixed

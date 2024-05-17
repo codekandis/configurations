@@ -15,7 +15,7 @@ interface PlainConfigurationLoaderInterface
 	public function getPlainConfiguration(): array;
 
 	/**
-	 * Loads the plain configuration.
+	 * Loads the plain configuration. If a plain configuration has already been loaded the new plain configuration will be merged recusively.
 	 * @param string $directoryPath The path of the directory containing the plain configuration.
 	 * @param string $configurationName The name of the plain configuration.
 	 * @return static The plain configuration loader.
