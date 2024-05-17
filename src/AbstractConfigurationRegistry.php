@@ -37,7 +37,7 @@ abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInt
 	 */
 	public static function _(): ConfigurationRegistryInterface
 	{
-		$calledClass = get_called_class();
+		$calledClass = static::class;
 
 		return static::$instances[ $calledClass ]
 			   ?? static::$instances[ $calledClass ] = new static();
