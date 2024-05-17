@@ -61,7 +61,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	 * {@inheritDoc}
 	 */
 	#[Override]
-	public function readOrDefault( mixed $default, string ...$indices ): mixed
+	public function readOrDefault( mixed $defaultValue, string ...$indices ): mixed
 	{
 		try
 		{
@@ -69,7 +69,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 		}
 		catch ( UnknownPlainConfigurationIndexException )
 		{
-			return $default;
+			return $defaultValue;
 		}
 	}
 }
