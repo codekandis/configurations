@@ -9,12 +9,6 @@ namespace CodeKandis\Configurations;
 abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInterface
 {
 	/**
-	 * Represents the error message if the clone method of the configuration registry has been called.
-	 * @var string
-	 */
-	protected const ERROR_CLONING_IS_PROHIBITED = 'The cloning of the configuration registry is prohibited.';
-
-	/**
 	 * Stores the singleton instances of the configuration registries.
 	 * @var ConfigurationRegistryInterface[]
 	 */
@@ -30,11 +24,11 @@ abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInt
 
 	/**
 	 * Clones the configuration registry.
-	 * @throws CloningConfigurationRegistryIsProhibitedException The cloning of the configuration registry is prohibited.
+	 * @throws CloningConfigurationRegistryUnsupportedExceptionInterface The cloning of the configuration registry is unsupported.
 	 */
 	private function __clone()
 	{
-		throw new CloningConfigurationRegistryIsProhibitedException( static::ERROR_CLONING_IS_PROHIBITED );
+		throw new CloningConfigurationRegistryUnsupportedException();
 	}
 
 	/**

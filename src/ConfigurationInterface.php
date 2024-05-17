@@ -12,7 +12,7 @@ interface ConfigurationInterface
 	 * Reads a value from the plain configuration.
 	 * @param string[] $indices The nested indices of the value to read.
 	 * @return mixed The read value.
-	 * @throws PlainConfigurationIndexNotFoundException The index does not exist in the plain configuration.
+	 * @throws UnknownPlainConfigurationIndexExceptionInterface The index does not exist in the plain configuration.
 	 */
 	public function read( string ...$indices );
 

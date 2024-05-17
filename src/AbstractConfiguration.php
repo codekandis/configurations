@@ -2,7 +2,6 @@
 namespace CodeKandis\Configurations;
 
 use function array_key_exists;
-use function sprintf;
 
 /**
  * Represents the base class of any configuration.
@@ -11,12 +10,6 @@ use function sprintf;
  */
 abstract class AbstractConfiguration implements ConfigurationInterface
 {
-	/**
-	 * Represents an error message if an index does not exist in the plain configuration.
-	 * @var string
-	 */
-	protected const ERROR_INDEX_NOT_FOUND = 'The index `%s` does not exist in the plain configuration.';
-
 	/**
 	 * Stores the plain configuration data.
 	 * @var array
@@ -43,12 +36,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 		{
 			if ( false === is_array( $nestedConfigurationData ) || false === array_key_exists( $index, $nestedConfigurationData ) )
 			{
-				throw new PlainConfigurationIndexNotFoundException(
-					sprintf(
-						static::ERROR_INDEX_NOT_FOUND,
-						$index
-					)
-				);
+				throw UnknownPlainConfigurationIndexException::with_unknownIndex( $index );
 			}
 
 			$nestedConfigurationData = $nestedConfigurationData[ $index ];
@@ -66,7 +54,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 		{
 			return $this->read( ...$indices );
 		}
-		catch ( PlainConfigurationIndexNotFoundException $throwable )
+		catch ( UnknownPlainConfigurationIndexException )
 		{
 			return null;
 		}
@@ -81,7 +69,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 		{
 			return $this->read( ...$indices );
 		}
-		catch ( PlainConfigurationIndexNotFoundException $throwable )
+		catch ( UnknownPlainConfigurationIndexException )
 		{
 			return $default;
 		}

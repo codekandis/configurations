@@ -19,7 +19,7 @@ interface PlainConfigurationLoaderInterface
 	 * @param string $directoryPath The path of the directory containing the plain configuration.
 	 * @param string $configurationName The name of the plain configuration.
 	 * @return self The plain configuration loader.
-	 * @throws PlainConfigurationNotFoundException The configuration to load does not exist.
+	 * @throws PlainConfigurationNotFoundExceptionInterface The configuration to load does not exist.
 	 */
 	public function load( string $directoryPath, string $configurationName ): self;
 }
