@@ -8,4 +8,8 @@ namespace CodeKandis\Configurations;
  */
 interface ConfigurationRegistryInterface
 {
+	/**
+	 * Static constructor method.
+	 */
+	public static function _(): static;
 }

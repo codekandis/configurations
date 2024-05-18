@@ -1,6 +1,9 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\Configurations;
 
+use Override;
+use function array_key_exists;
+
 /**
  * Represents the base class of any configuration registry.
  * @package codekandis/configurations
@@ -10,7 +13,7 @@ abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInt
 {
 	/**
 	 * Stores the singleton instances of the configuration registries.
-	 * @var ConfigurationRegistryInterface[]
+	 * @var static[]
 	 */
 	private static array $instances = [];
 
@@ -32,15 +35,16 @@ abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInt
 	}
 
 	/**
-	 * Creates the singleton instance of the configuration registry.
-	 * @return ConfigurationRegistryInterface The singleton instance of the configuration registry.
+	 * @inheritDoc
 	 */
-	public static function _(): ConfigurationRegistryInterface
+	#[Override]
+	public static function _(): static
 	{
 		$calledClass = static::class;
 
-		return static::$instances[ $calledClass ]
-			   ?? static::$instances[ $calledClass ] = new static();
+		return false === array_key_exists( $calledClass, static::$instances )
+			? static::$instances[ $calledClass ] = new static()
+			: static::$instances[ $calledClass ];
 	}
 
 	/**
