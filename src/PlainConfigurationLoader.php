@@ -4,6 +4,7 @@ namespace CodeKandis\Configurations;
 use Override;
 use function array_replace_recursive;
 use function file_exists;
+use function is_array;
 use function sprintf;
 
 /**
@@ -45,10 +46,14 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 			throw PlainConfigurationNotFoundException::with_configurationPath( $plainConfigurationPath );
 		}
 
-		$this->plainConfiguration = array_replace_recursive(
-			$this->plainConfiguration,
-			require $plainConfigurationPath
-		);
+		$loadedPlainConfiguration = require $plainConfigurationPath;
+
+		if ( false === is_array( $loadedPlainConfiguration ) )
+		{
+			throw InvalidPlainConfigurationException::with_configurationPath( $plainConfigurationPath );
+		}
+
+		$this->plainConfiguration = array_replace_recursive( $this->plainConfiguration, $loadedPlainConfiguration );
 
 		return $this;
 	}
