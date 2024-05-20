@@ -6,11 +6,11 @@ use function array_key_exists;
 use function is_array;
 
 /**
- * Represents the base class of any configuration.
+ * Represents a configuration.
  * @package codekandis/configurations
  * @author Christian Ramelow <info@codekandis.net>
  */
-abstract class AbstractConfiguration implements ConfigurationInterface
+class Configuration implements ConfigurationInterface
 {
 	/**
 	 * Constructor method.
