@@ -32,7 +32,7 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 	 * {@inheritDoc}
 	 */
 	#[Override]
-	public function load( string $directoryPath, string $configurationName ): PlainConfigurationLoaderInterface
+	public function load( string $directoryPath, string $configurationName ): static
 	{
 		$plainConfigurationPath = sprintf(
 			'%s/%s.php',
