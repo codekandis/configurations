@@ -61,7 +61,7 @@ abstract class AbstractConfiguration implements ConfigurationInterface
 	 * {@inheritDoc}
 	 */
 	#[Override]
-	public function readOrDefault( mixed $defaultValue, string ...$indices ): mixed
+	public function readOrDefault( mixed $defaultValue = null, string ...$indices ): mixed
 	{
 		try
 		{
