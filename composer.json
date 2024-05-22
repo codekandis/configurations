@@ -1,7 +1,7 @@
 {
 	"name": "codekandis/configurations",
 	"description": "`codekandis/configurations` is a library providing configuration interfaces and classes.",
-	"version": "dev-development",
+	"version": "1.0.0",
 	"keywords": [
 		"php",
 		"library",
