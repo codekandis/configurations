@@ -1,8 +1,10 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\Configurations;
 
+use Override;
 use function array_replace_recursive;
 use function file_exists;
+use function is_array;
 use function sprintf;
 
 /**
@@ -13,29 +15,24 @@ use function sprintf;
 class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 {
 	/**
-	 * Represents the error message if the plain configuration does not exist.
-	 * @var string
-	 */
-	protected const ERROR_PLAIN_CONFIGURATION_NOT_FOUND = 'The plain configuration `%s` does not exist.';
-
-	/**
-	 * Stores the merged plain configuration;
-	 * @var array
+	 * Stores the merged plain configuration.
 	 */
 	private array $plainConfiguration = [];
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
+	#[Override]
 	public function getPlainConfiguration(): array
 	{
 		return $this->plainConfiguration;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
-	public function load( string $directoryPath, string $configurationName ): PlainConfigurationLoaderInterface
+	#[Override]
+	public function load( string $directoryPath, string $configurationName ): static
 	{
 		$plainConfigurationPath = sprintf(
 			'%s/%s.php',
@@ -45,18 +42,17 @@ class PlainConfigurationLoader implements PlainConfigurationLoaderInterface
 
 		if ( false === file_exists( $plainConfigurationPath ) )
 		{
-			throw new PlainConfigurationNotFoundException(
-				sprintf(
-					static::ERROR_PLAIN_CONFIGURATION_NOT_FOUND,
-					$plainConfigurationPath
-				)
-			);
+			throw PlainConfigurationNotFoundException::with_configurationPath( $plainConfigurationPath );
 		}
 
-		$this->plainConfiguration = array_replace_recursive(
-			$this->plainConfiguration,
-			require $plainConfigurationPath
-		);
+		$loadedPlainConfiguration = require $plainConfigurationPath;
+
+		if ( false === is_array( $loadedPlainConfiguration ) )
+		{
+			throw InvalidPlainConfigurationException::with_configurationPath( $plainConfigurationPath );
+		}
+
+		$this->plainConfiguration = array_replace_recursive( $this->plainConfiguration, $loadedPlainConfiguration );
 
 		return $this;
 	}

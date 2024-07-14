@@ -1,6 +1,9 @@
 <?php declare( strict_types = 1 );
 namespace CodeKandis\Configurations;
 
+use Override;
+use function array_key_exists;
+
 /**
  * Represents the base class of any configuration registry.
  * @package codekandis/configurations
@@ -9,14 +12,8 @@ namespace CodeKandis\Configurations;
 abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInterface
 {
 	/**
-	 * Represents the error message if the clone method of the configuration registry has been called.
-	 * @var string
-	 */
-	protected const ERROR_CLONING_IS_PROHIBITED = 'The cloning of the configuration registry is prohibited.';
-
-	/**
 	 * Stores the singleton instances of the configuration registries.
-	 * @var ConfigurationRegistryInterface[]
+	 * @var static[]
 	 */
 	private static array $instances = [];
 
@@ -30,23 +27,24 @@ abstract class AbstractConfigurationRegistry implements ConfigurationRegistryInt
 
 	/**
 	 * Clones the configuration registry.
-	 * @throws CloningConfigurationRegistryIsProhibitedException The cloning of the configuration registry is prohibited.
+	 * @throws CloningConfigurationRegistryUnsupportedExceptionInterface The cloning of the configuration registry is unsupported.
 	 */
-	private function __clone()
+	private function __clone(): void
 	{
-		throw new CloningConfigurationRegistryIsProhibitedException( static::ERROR_CLONING_IS_PROHIBITED );
+		throw new CloningConfigurationRegistryUnsupportedException();
 	}
 
 	/**
-	 * Creates the singleton instance of the configuration registry.
-	 * @return ConfigurationRegistryInterface The singleton instance of the configuration registry.
+	 * @inheritDoc
 	 */
-	public static function _(): ConfigurationRegistryInterface
+	#[Override]
+	public static function _(): static
 	{
-		$calledClass = get_called_class();
+		$calledClass = static::class;
 
-		return static::$instances[ $calledClass ]
-			   ?? static::$instances[ $calledClass ] = new static();
+		return false === array_key_exists( $calledClass, static::$instances )
+			? static::$instances[ $calledClass ] = new static()
+			: static::$instances[ $calledClass ];
 	}
 
 	/**
